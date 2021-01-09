@@ -1,8 +1,43 @@
 ---
 title: "Reporte de incidencia delictiva"
 output: html_document
+editor_options: 
+  chunk_output_type: console
+  
+params:
+    estado: delitos_Aguascalientes.csv
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+
+```{r}
+list_archivos <- list.files(here::here('data/interim'), pattern = '*.csv')
+
+library(tidyverse)
+
+
+# lista_de_entidades <- map(list_archivos, 
+#     ~ data.table::fread(glue::glue(here::here('data/interim/{.x}')), 
+#                         encoding = 'Latin-1') %>% 
+#         tibble()) %>% 
+#     set_names(list_archivos)
+
+```
+
+
+```{r}
+
+estado = params$estado
+data.table::fread(glue::glue(here::here('data/interim/{estado}')), 
+                         encoding = 'Latin-1') %>% 
+    group_by(ano) %>% 
+    summarise(total = sum(delitos, na.rm = T)) %>% 
+    ggplot() +
+    geom_line(aes(x = ano, y = total)) +
+    theme_bw() 
+```
+
+
