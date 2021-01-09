@@ -1,5 +1,8 @@
 # Librerías ====
 library(tidyverse)
 
+# Lectura ====
+
+
 
 
