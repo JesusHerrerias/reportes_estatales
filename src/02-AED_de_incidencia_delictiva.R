@@ -1,8 +1,7 @@
 # Librerías ====
 library(tidyverse)
 
-# Lectura ====
-
-
+# Lectura 
+read_csv()
 
 
